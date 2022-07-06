@@ -12,14 +12,23 @@ from tqdm import tqdm
 
 from transformers import BertForSequenceClassification, BertConfig, BertTokenizer
 from nltk.tokenize import TweetTokenizer
+from dotenv import load_dotenv
+import os
 
 
 def twitter_access(twitter_account):
 
-  consumer_api_key = twitter_account.loc[0,'Id']
-  consumer_api_key_secret = twitter_account.loc[1,'Id']
-  access_token = twitter_account.loc[2,'Id']
-  access_token_secret = twitter_account.loc[3,'Id']
+  # consumer_api_key = twitter_account.loc[0,'Id']
+  # consumer_api_key_secret = twitter_account.loc[1,'Id']
+  # access_token = twitter_account.loc[2,'Id']
+  # access_token_secret = twitter_account.loc[3,'Id']
+
+  consumer_api_key = os.getenv("CONSUMER_API_KEY")
+  consumer_api_key_secret = os.getenv("CONSUMER_API_KEY_SECRET")
+  access_token = os.getenv("ACCESS_TOKEN")
+  access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
+
+
 
   return consumer_api_key, consumer_api_key_secret, access_token, access_token_secret
 

@@ -4,11 +4,14 @@ import random
 import numpy as np
 import pandas as pd
 import tweepy as tw
+import os 
 
 import torch
 from torch import optim
 import torch.nn.functional as F
 from tqdm import tqdm
+from dotenv import load_dotenv
+
 
 from transformers import BertForSequenceClassification, BertConfig, BertTokenizer
 from nltk.tokenize import TweetTokenizer
@@ -30,8 +33,13 @@ def sentiment (tweet):
     w2i, i2w = DocumentSentimentDataset.LABEL2INDEX, DocumentSentimentDataset.INDEX2LABEL
 
     #2. Twitter access
-    twitter_account = pd.read_csv('Twitter Developer Account.csv')
-    consumer_api_key, consumer_api_key_secret, access_token, access_token_secret = twitter_access(twitter_account)
+    # twitter_account = pd.read_csv('Twitter Developer Account.csv')
+    # consumer_api_key, consumer_api_key_secret, access_token, access_token_secret = twitter_access(twitter_account)
+    # api = twitter_api(consumer_api_key, consumer_api_key_secret, access_token, access_token_secret)
+    consumer_api_key = os.getenv("CONSUMER_API_KEY")
+    consumer_api_key_secret = os.getenv("CONSUMER_API_KEY_SECRET")
+    access_token = os.getenv("ACCESS_TOKEN")
+    access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
     api = twitter_api(consumer_api_key, consumer_api_key_secret, access_token, access_token_secret)
 
     #3. Take tweets
